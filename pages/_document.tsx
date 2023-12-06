@@ -6,18 +6,20 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <Partytown
-          debug={false}
+          debug={true}
           forward={["dataLayer.push"]}
-          // resolveUrl={(url, _, type) => {
-          //   if (type === "script") {
-          //     var proxyUrl = new URL("https://gtag-new.vercel.app");
-          //     proxyUrl.searchParams.append("url", url.href);
-
-          //     return proxyUrl;
-          //   }
-
-          //   return url;
-          // }}
+          set={(opts) => {
+            const isDebugging =
+              opts?.window?.location?.search.includes('gtm_debug');
+            if (
+              isDebugging &&
+              opts?.name === 'type' &&
+              opts?.nodeName === 'SCRIPT'
+            ) {
+              return opts.prevent;
+            }
+            return opts.continue;
+          }}
         />
 
         <script
