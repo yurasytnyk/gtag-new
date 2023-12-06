@@ -1,18 +1,29 @@
 import { Partytown } from "@builder.io/partytown/react";
 import { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head />
 
-      <Partytown debug={true} forward={["dataLayer.push"]} />
+      <Partytown
+        debug={false}
+        forward={["dataLayer.push"]}
+        resolveUrl={(url, _, type) => {
+          if (type === "script") {
+            var proxyUrl = new URL("https://gtag-new.vercel.app");
+            proxyUrl.searchParams.append("url", url.href);
+
+            return proxyUrl;
+          }
+
+          return url;
+        }}
+      />
 
       <script
         id="gtm"
         type="text/partytown"
-        async={true}
         dangerouslySetInnerHTML={{
           __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
