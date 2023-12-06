@@ -8,16 +8,16 @@ export default function Document() {
         <Partytown
           debug={false}
           forward={["dataLayer.push"]}
-          resolveUrl={(url, _, type) => {
-            if (type === "script") {
-              var proxyUrl = new URL("https://gtag-new.vercel.app");
-              proxyUrl.searchParams.append("url", url.href);
+          // resolveUrl={(url, _, type) => {
+          //   if (type === "script") {
+          //     var proxyUrl = new URL("https://gtag-new.vercel.app");
+          //     proxyUrl.searchParams.append("url", url.href);
 
-              return proxyUrl;
-            }
+          //     return proxyUrl;
+          //   }
 
-            return url;
-          }}
+          //   return url;
+          // }}
         />
 
         <script
