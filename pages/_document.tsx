@@ -8,19 +8,13 @@ export default function Document() {
         <Partytown
           debug={true}
           forward={["dataLayer.push"]}
-          // resolveUrl={(url, location) => {
-          //   if (url.pathname.includes("/debug/bootstrap")) {
-          //     var proxyUrl = new URL(location.origin + "/googletagmanager/debug/bootstrap");
-          //     proxyUrl.searchParams.append("url", url.href);
-          //     return proxyUrl;
-          //   }
-          //   return url;
-          // }}
           set={(opts) => {
             const isDebugging = opts?.window?.location?.search.includes("gtm_debug");
+
             if (isDebugging && opts?.name === "type" && opts?.nodeName === "SCRIPT") {
               return opts.prevent;
             }
+
             return opts.continue;
           }}
         />
