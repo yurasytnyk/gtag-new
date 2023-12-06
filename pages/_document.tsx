@@ -6,6 +6,11 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <Partytown debug={true} forward={["dataLayer.push"]} />
+      </Head>
+
+      <body>
+        <Main />
+        <NextScript />
 
         <script
           id="gtm"
@@ -18,11 +23,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PXQZBDRL');`,
           }}
         />
-      </Head>
-
-      <body>
-        <Main />
-        <NextScript />
 
         <noscript>
           <iframe
